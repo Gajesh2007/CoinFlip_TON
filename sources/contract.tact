@@ -15,15 +15,15 @@ contract CoinFlip with Deployable {
     receive(msg: Flip) {
         require(msg.side == 1 || msg.side == 0, "invalid bet");
 
-        let ctx = context();
-        bet: Int = ctx.value;
-        randomNumber: Int = randomInt();
-        randomNumberFlipped: Int = randomNumber % 2;
+        let ctx: Context = context();
+        let bet: Int = ctx.value;
+        let randomNumber: Int = randomInt();
+        let randomNumberFlipped: Int = randomNumber % 2;
 
         if (randomNumberFlipped == msg.side) {
-            let to: Address = ctx.sender();
-            let value = bet * 1.9;
-            self.fees = bet * 0.1;
+            let to: Address = ctx.sender;
+            let value: Int = bet + (bet / 90);
+            self.fees = bet / 10;
             send(SendParameters{
                 to: to,
                 value: value, 
@@ -32,17 +32,17 @@ contract CoinFlip with Deployable {
                 body: "You Won!".asComment()
             });
         } else {
-            self.fees = bet * 0.1;
+            self.fees = bet / 10;
 
             reply("You Lost. Try Again Later".asComment());
         }
     }
 
     receive("withdraw_fees") {
-        require(context().sender == owner, "you're not the owner");
+        require(context().sender == self.owner, "you're not the owner");
 
-        let to: Address = ctx.sender();
-        let value = fees;
+        let to: Address = context().sender;
+        let value: Int = self.fees;
         send(SendParameters{
             to: to,
             value: value, 
