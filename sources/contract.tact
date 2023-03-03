@@ -4,7 +4,7 @@ message Flip {
     side: Int;
 }
 
-contract CoinFlip is Deployable {
+contract CoinFlip with Deployable {
     owner: Address;
     fees: Int;
  
