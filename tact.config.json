@@ -1,0 +1,7 @@
+{
+    "projects": [{
+        "name": "coinflip",
+        "path": "./sources/contract.tact",
+        "output": "./sources/output"
+    }]
+}

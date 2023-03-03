@@ -1,0 +1,15 @@
+{
+  "name": "coinflip",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tact --config ./tact.config.json"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@tact-lang/compiler": "^0.10.1"
+  }
+}
